@@ -32,6 +32,7 @@
   .game-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,245,255,0.03) 0%,transparent 50%);pointer-events:none;}
   .game-card:hover{transform:translateY(-6px);border-color:rgba(0,245,255,0.4);box-shadow:0 0 30px rgba(0,245,255,0.12);}
   .game-card.pink:hover{border-color:rgba(255,0,110,0.4);box-shadow:0 0 30px rgba(255,0,110,0.12);}
+  .game-card.green:hover{border-color:rgba(0,255,136,0.4);box-shadow:0 0 30px rgba(0,255,136,0.12);}
   .game-card.coming{opacity:0.4;pointer-events:none;}
   .card-preview{height:180px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:#060612;}
   .card-badge{position:absolute;top:10px;right:10px;font-size:0.3rem;padding:4px 8px;border-radius:2px;letter-spacing:0.1em;}
@@ -42,16 +43,20 @@
   .card-body{padding:16px;flex:1;display:flex;flex-direction:column;gap:10px;}
   .card-title{font-family:'Orbitron',monospace;font-size:clamp(0.65rem,2vw,0.85rem);font-weight:700;color:var(--cyan);text-shadow:0 0 8px rgba(0,245,255,0.5);letter-spacing:0.1em;}
   .game-card.pink .card-title{color:var(--pink);text-shadow:0 0 8px rgba(255,0,110,0.5);}
+  .game-card.green .card-title{color:var(--green);text-shadow:0 0 8px rgba(0,255,136,0.5);}
   .game-card.coming .card-title{color:var(--dim);text-shadow:none;}
   .card-desc{font-size:0.32rem;color:var(--dim);line-height:1.9;letter-spacing:0.05em;}
   .card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;}
   .tag{font-size:0.28rem;padding:3px 7px;border-radius:2px;letter-spacing:0.08em;background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.15);color:rgba(0,245,255,0.7);}
   .game-card.pink .tag{background:rgba(255,0,110,0.06);border-color:rgba(255,0,110,0.15);color:rgba(255,0,110,0.7);}
+  .game-card.green .tag{background:rgba(0,255,136,0.06);border-color:rgba(0,255,136,0.15);color:rgba(0,255,136,0.7);}
   .card-footer{padding:12px 16px;border-top:1px solid rgba(255,255,255,0.04);}
   .play-btn{display:block;width:100%;text-align:center;padding:11px;font-family:'Press Start 2P',monospace;font-size:0.45rem;letter-spacing:0.15em;background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.3);color:var(--cyan);text-shadow:0 0 8px var(--cyan);border-radius:2px;transition:background 0.15s;cursor:pointer;}
   .play-btn:hover{background:rgba(0,245,255,0.16);box-shadow:0 0 20px rgba(0,245,255,0.2);}
   .game-card.pink .play-btn{background:rgba(255,0,110,0.08);border-color:rgba(255,0,110,0.3);color:var(--pink);text-shadow:0 0 8px var(--pink);}
   .game-card.pink .play-btn:hover{background:rgba(255,0,110,0.16);}
+  .game-card.green .play-btn{background:rgba(0,255,136,0.08);border-color:rgba(0,255,136,0.3);color:var(--green);text-shadow:0 0 8px var(--green);}
+  .game-card.green .play-btn:hover{background:rgba(0,255,136,0.16);}
   .game-card.coming .play-btn{background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.08);color:var(--dim);text-shadow:none;}
   .ticker{position:relative;z-index:10;background:rgba(0,245,255,0.06);border-top:1px solid rgba(0,245,255,0.1);border-bottom:1px solid rgba(0,245,255,0.1);overflow:hidden;padding:10px 0;}
   .ticker-inner{display:flex;white-space:nowrap;animation:ticker-scroll 25s linear infinite;}
@@ -71,6 +76,7 @@
   @keyframes pipe-move{0%{left:110%}100%{left:-10%}}
   .flappy-star{position:absolute;width:2px;height:2px;background:white;border-radius:50%;animation:twinkle 2s ease-in-out infinite;}
   @keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
+  .dragon-scene{width:100%;height:100%;background:#060610;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
   .coming-icon{font-size:3rem;opacity:0.3;}
   .coming-label{font-size:0.35rem;color:#3a3a5a;margin-top:8px;font-family:'Press Start 2P';}
   @media(max-width:480px){.games-grid{grid-template-columns:1fr}}
@@ -98,15 +104,15 @@
 </footer>
 
 <script>
-// ════════════════════════════════════════════
-// 🎮 YENİ OYUN EKLEMEK İÇİN SADECE BURAYA EKLE!
-// ════════════════════════════════════════════
+// ══════════════════════════════════════════
+// 🎮 YENİ OYUN EKLEMEK İÇİN SADECE BURAYA!
+// ══════════════════════════════════════════
 const OYUNLAR = [
   {
     isim: "TETRİS",
     aciklama: "Klasik blok dizme oyunu! Satırları doldur, patlat, rekor kır. Neon efektler ve retro müzik.",
     link: "https://tahaenessoylemez21-star.github.io/Tetris/",
-    etiketler: ["BULMACA", "KLASİK", "MÜZİK", "MOBİL"],
+    etiketler: ["BULMACA","KLASİK","MÜZİK","MOBİL"],
     rozet: "YENİ",
     renk: "cyan",
     preview: "tetris",
@@ -115,69 +121,50 @@ const OYUNLAR = [
     isim: "FLAPPY PARS",
     aciklama: "Pars'ı engellerin arasından geçir! 🪙 Altın topla, rekor kır. Global liderlik tablosu!",
     link: "https://tahaenessoylemez21-star.github.io/FlappyPars/",
-    etiketler: ["AKSİYON", "ALTIN", "LİDERLİK", "MOBİL"],
+    etiketler: ["AKSİYON","ALTIN","LİDERLİK","MOBİL"],
     rozet: "HOT",
     renk: "pink",
     preview: "flappy",
   },
   {
-    isim: "SNAKE",
-    aciklama: "Yılan oyunu — yakında eklenecek!",
-    link: "",
-    etiketler: ["YAKINDA"],
-    rozet: "SOON",
-    renk: "cyan",
-    preview: "soon",
-    icon: "🐍",
-  },
-  {
-    isim: "HAFIZA OYUNU",
-    aciklama: "Eşleştirme oyunu — yakında eklenecek!",
-    link: "",
-    etiketler: ["YAKINDA"],
-    rozet: "SOON",
-    renk: "cyan",
-    preview: "soon",
-    icon: "🧠",
+    isim: "NEON EJDERHA",
+    aciklama: "Ejderhayı yönlendir! 🪙 Altın topla, ⭐ güç kazan, 🧱 duvarlardan kaç! Global liderlik.",
+    link: "https://tahaenessoylemez21-star.github.io/NeonEjderha/",
+    etiketler: ["AKSİYON","ALTIN","GÜÇLER","MOBİL"],
+    rozet: "YENİ",
+    renk: "green",
+    preview: "dragon",
   },
 ];
-// ════════════════════════════════════════════
+// ══════════════════════════════════════════
 
-// Aktif oyun sayısını say
-const aktifOyunlar = OYUNLAR.filter(o => o.link).length;
-
-// Header stats
-document.getElementById('header-stats').innerHTML = `
-  <div class="stat-chip">🎮 ${aktifOyunlar} OYUN</div>
+const aktif = OYUNLAR.filter(o=>o.link).length;
+document.getElementById('header-stats').innerHTML=`
+  <div class="stat-chip">🎮 ${aktif} OYUN</div>
   <div class="stat-chip">⚡ ANINDA OYNA</div>
-  <div class="stat-chip">📱 MOBİL UYUMLU</div>
-`;
+  <div class="stat-chip">📱 MOBİL UYUMLU</div>`;
 
-// Ticker
-const oyunIsimleri = OYUNLAR.filter(o=>o.link).map(o=>`<span>${o.isim}</span>`).join(' &nbsp;&nbsp; ');
-const tickerMsg = `★ BEDAVAOYUN ★ &nbsp;&nbsp; ÜCRETSİZ OYNA &nbsp;&nbsp; ${oyunIsimleri} &nbsp;&nbsp; YAKINDA DAHA FAZLASI &nbsp;&nbsp; MOBİL UYUMLU &nbsp;&nbsp; `;
-document.getElementById('ticker-inner').innerHTML = (tickerMsg+tickerMsg).repeat(2);
+const oyunIsimleri = OYUNLAR.map(o=>`<span>${o.isim}</span>`).join(' &nbsp;&nbsp; ');
+const tickerMsg = `★ BEDAVAOYUN ★ &nbsp;&nbsp; ÜCRETSİZ OYNA &nbsp;&nbsp; ${oyunIsimleri} &nbsp;&nbsp; YAKINDA DAHA FAZLASI &nbsp;&nbsp; `;
+document.getElementById('ticker-inner').innerHTML=(tickerMsg+tickerMsg).repeat(2);
 
-// Kartları oluştur
 const grid = document.getElementById('games-grid');
-OYUNLAR.forEach((oyun, i) => {
-  const coming = !oyun.link;
-  const card = document.createElement('div');
-  card.className = `game-card ${oyun.renk==='pink'?'pink':''} ${coming?'coming':''}`;
-  card.style.animationDelay = (i*0.1+0.1)+'s';
-  if (!coming) card.onclick = () => window.open(oyun.link, '_blank');
+OYUNLAR.forEach((oyun,i)=>{
+  const coming=!oyun.link;
+  const card=document.createElement('div');
+  card.className=`game-card ${oyun.renk||''} ${coming?'coming':''}`;
+  card.style.animationDelay=(i*0.1+0.1)+'s';
+  if(!coming) card.onclick=()=>window.open(oyun.link,'_blank');
 
-  // Rozet
-  const rozetClass = oyun.rozet==='HOT'?'badge-hot':oyun.rozet==='YENİ'?'badge-new':'badge-soon';
-  const rozetText = oyun.rozet==='HOT'?'🔥 HOT':oyun.rozet==='YENİ'?'YENİ':'🔒 YAKINDA';
+  const rozetClass=oyun.rozet==='HOT'?'badge-hot':oyun.rozet==='YENİ'?'badge-new':'badge-soon';
+  const rozetText=oyun.rozet==='HOT'?'🔥 HOT':oyun.rozet==='YENİ'?'YENİ':'🔒 YAKINDA';
 
-  // Preview HTML
-  let previewHTML = '';
-  if (oyun.preview === 'tetris') {
-    previewHTML = `<div class="tetris-scene" id="tetris-scene-${i}"></div>`;
-  } else if (oyun.preview === 'flappy') {
-    previewHTML = `
-      <div class="flappy-scene" id="flappy-scene-${i}">
+  let previewHTML='';
+  if(oyun.preview==='tetris'){
+    previewHTML=`<div class="tetris-scene" id="ts-${i}"></div>`;
+  } else if(oyun.preview==='flappy'){
+    previewHTML=`
+      <div class="flappy-scene" id="fs-${i}">
         <div class="flappy-bird">🐆</div>
         <div class="flappy-pipe" style="top:0;height:60px;animation-delay:0s;"></div>
         <div class="flappy-pipe" style="bottom:28px;height:50px;animation-delay:0s;"></div>
@@ -185,18 +172,16 @@ OYUNLAR.forEach((oyun, i) => {
         <div class="flappy-pipe" style="bottom:28px;height:40px;animation-delay:1.5s;"></div>
         <div class="flappy-ground"></div>
       </div>`;
+  } else if(oyun.preview==='dragon'){
+    previewHTML=`<div class="dragon-scene" id="ds-${i}"><span style="font-size:3rem;animation:bounce 1s ease-in-out infinite;">🐉</span></div>`;
   } else {
-    previewHTML = `
-      <div style="text-align:center;">
-        <div class="coming-icon">${oyun.icon||'🎮'}</div>
-        <div class="coming-label">YAKINDA</div>
-      </div>`;
+    previewHTML=`<div style="text-align:center;"><div class="coming-icon">${oyun.icon||'🎮'}</div><div class="coming-label">YAKINDA</div></div>`;
   }
 
-  const etiketHTML = oyun.etiketler.map(e=>`<span class="tag">${e}</span>`).join('');
-  const btnText = coming ? '🔒 YAKINDA' : '▶ OYNA';
+  const etiketHTML=oyun.etiketler.map(e=>`<span class="tag">${e}</span>`).join('');
+  const btnText=coming?'🔒 YAKINDA':'▶ OYNA';
 
-  card.innerHTML = `
+  card.innerHTML=`
     <div class="card-preview">
       ${previewHTML}
       <div class="card-badge ${rozetClass}">${rozetText}</div>
@@ -206,14 +191,11 @@ OYUNLAR.forEach((oyun, i) => {
       <div class="card-desc">${oyun.aciklama}</div>
       <div class="card-tags">${etiketHTML}</div>
     </div>
-    <div class="card-footer">
-      <div class="play-btn">${btnText}</div>
-    </div>`;
-
+    <div class="card-footer"><div class="play-btn">${btnText}</div></div>`;
   grid.appendChild(card);
 });
 
-// Floating pixels
+// Pixels
 const colors=['#00f5ff','#ff006e','#ffbe0b','#00ff88','#cc00ff'];
 const pixelsEl=document.getElementById('pixels');
 for(let i=0;i<40;i++){
@@ -223,9 +205,9 @@ for(let i=0;i<40;i++){
   pixelsEl.appendChild(p);
 }
 
-// Tetris animasyonu
+// Tetris animasyon
 const blockColors=['#00f5ff','#ffbe0b','#cc00ff','#ff6b00','#0088ff','#00ff88','#ff006e'];
-document.querySelectorAll('[id^="tetris-scene-"]').forEach(scene=>{
+document.querySelectorAll('[id^="ts-"]').forEach(scene=>{
   for(let c=0;c<9;c++){
     const col=document.createElement('div');
     col.className='t-col';
@@ -243,7 +225,7 @@ document.querySelectorAll('[id^="tetris-scene-"]').forEach(scene=>{
 });
 
 // Flappy yıldızlar
-document.querySelectorAll('[id^="flappy-scene-"]').forEach(scene=>{
+document.querySelectorAll('[id^="fs-"]').forEach(scene=>{
   for(let i=0;i<20;i++){
     const star=document.createElement('div');
     star.className='flappy-star';
@@ -252,16 +234,18 @@ document.querySelectorAll('[id^="flappy-scene-"]').forEach(scene=>{
   }
 });
 
-  {
-  isim: "NEON EJDERHA",
-  aciklama: "Ejderhayı yönlendir! 🪙 Altın topla, ⭐ güç kazan, 🧱 duvarlardan kaç!",
-  link: "https://tahaenessoylemez21-star.github.io/NeonEjderha/",
-  etiketler: ["AKSİYON", "ALTIN", "LİDERLİK", "MOBİL"],
-  rozet: "YENİ",
-  renk: "cyan",
-  preview: "soon",
-  icon: "🐉",
-},
+// Dragon scene neon grid
+document.querySelectorAll('[id^="ds-"]').forEach(scene=>{
+  scene.style.background='#060610';
+  const neonColors=['#00ff88','#cc00ff','#00f5ff'];
+  for(let i=0;i<6;i++){
+    const dot=document.createElement('div');
+    const c=neonColors[Math.floor(Math.random()*neonColors.length)];
+    dot.style.cssText=`position:absolute;width:4px;height:4px;background:${c};border-radius:50%;box-shadow:0 0 8px ${c};left:${10+Math.random()*80}%;top:${10+Math.random()*80}%;animation:twinkle ${1+Math.random()*2}s ease-in-out infinite;animation-delay:${Math.random()*2}s;`;
+    scene.appendChild(dot);
+  }
+});
 </script>
+<style>@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}</style>
 </body>
 </html>
